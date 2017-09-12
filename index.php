@@ -1,8 +1,8 @@
 
 <?php
 	//muutujad
-	$myName = "Andrus";
-	$myFamilyName = "Rinde";
+	$myName = "Hendrik";
+	$myFamilyName = "Heinsar";
 	
 	$hourNow = date("H");
 	
@@ -17,7 +17,7 @@
 	echo $minutesPassed;
 	
 	//echo $hourNow;
-	//võrdlen kellaaega ja annan hinngu, mis päeva osaga on tegemist (<   >   ==   >=  <=  !=  )
+	//võrdlen kellaaega ja annan, mis päeva osaga on tegemist (<   >   ==   >=  <=  !=  )
 	$partOfDay = "";
 	if ( $hourNow < 8 ){
 		$partOfDay = "varajane hommik";
@@ -29,6 +29,12 @@
 	if ( $hourNow >= 16 ) {
 		$partOfDay = "vaba aeg";
 	}
+	
+	$timeNow = strtotime(date("d.m.Y H:i:s"));
+	$schoolDayEnd = strtotime(date("d.m.Y" ." " ."15:45"));
+	$toTheEnd = $schoolDayEnd - $timeNow;
+	echo (round($toTheEnd / 60))
+	
 	
 ?>
 

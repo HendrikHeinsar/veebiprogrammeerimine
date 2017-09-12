@@ -1,0 +1,6 @@
+git config user.name "(username)"
+git config user.email git(kasutajanimi)@users.noreply.github.com
+git status
+->> git add . <<-- adds everything
+git commit -m "(insert message)"
+git push
