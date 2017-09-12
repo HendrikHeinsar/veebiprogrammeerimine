@@ -58,7 +58,7 @@
 
 <body>
 <h1> <?php
-		echo $myName ." " .$myFamilyName;
+		echo $myName ." . " .$myFamilyName;
 	?> </h1>
 	
 		<?php
