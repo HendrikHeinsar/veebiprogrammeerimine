@@ -4,6 +4,9 @@
 	$myName = "Hendrik";
 	$myFamilyName = "Heinsar";
 	
+	$monthNamesEt = ["jaanuar","veebruar","märts","aprill","mai","juuni","juuli","august","september","oktoober","november","detsember"];
+	$monthNow = $monthNamesEt[date("n")-1];
+	
 	$hourNow = date("H");
 	
 	$schoolDayStart = date("d.m.Y") ." " ."8.15";
@@ -14,7 +17,7 @@
 	//echo ($timeNow - $schoolBegin);
 	
 	$minutesPassed = round(($timeNow - $schoolBegin) / 60);
-	echo $minutesPassed;
+	//echo $minutesPassed;
 	
 	//echo $hourNow;
 	//võrdlen kellaaega ja annan, mis päeva osaga on tegemist (<   >   ==   >=  <=  !=  )
@@ -33,8 +36,31 @@
 	$timeNow = strtotime(date("d.m.Y H:i:s"));
 	$schoolDayEnd = strtotime(date("d.m.Y" ." " ."15:45"));
 	$toTheEnd = $schoolDayEnd - $timeNow;
-	echo (round($toTheEnd / 60))
+	//echo (round($toTheEnd / 60))
+	//var_dump($_POST);
 	
+	$myBirthYear = "";
+	$ageNotice = "";
+	
+	if( isset($_POST["birthYear"]) ){
+		$myBirthYear = $_POST["birthYear"];
+		$myAge = date("Y") - $_POST["birthYear"];
+		$ageNotice = "<p>Teie vanus on ligikaudu " .$myAge ." aastat.</p>";
+		
+		$ageNotice .= "<p>Olete elanud järgnevatel aastatel: </p>";
+		$ageNotice .= "\n <ul> \n";
+		
+		$yearNow = date("Y");
+		for($i = $myBirthYear; $i <= $yearNow; $i++){
+			$ageNotice .= "<li> \n" .$i ."</li> \n";
+		}
+		$ageNotice .= "</ul>";
+	}
+	/* COMMENT BLOCK */
+	//      TEEME TSÜKLI
+	/*for ($i = 0; $i < 5; $i++) {
+		echo "ha";
+	}*/
 	
 ?>
 
@@ -57,18 +83,38 @@
 </head>
 
 <body>
+
 <h1> <?php
+		
 		echo $myName ." . " .$myFamilyName;
 	?> </h1>
 	
 		<?php
 		echo "<p>Kõige esimene PHP abil väljastatud sõnum.</p>";
 		echo "<p>Täna on ";
-		echo date("d.m.Y") .", käes on " .$partOfDay;
+		echo date("d. ") .$monthNow .date(" Y") .", käes on " .$partOfDay;
 		echo ".</p>";
 		echo "<p>Lehe avamise hetkel oli kell " .date("H:i:s") .".</p>";
 	
 	?>
+	
+	
+	<h2>Natuke aastaarvudest</h2>
+	<form method="POST">
+		<label>Teie sünniaasta: </label>
+		<input type="number" name="birthYear" min="1900" max="2010" value=
+			"<?php echo $myBirthYear ?>">
+		<input type="submit" name="submitBirthYear" value="Kinnita">
+		
+	</form>
+	
+	
+	<?php 
+		if ( $ageNotice != "" ){
+			echo $ageNotice;
+		}
+	?>
+	
 	
   <script src="js/scripts.js"></script>
 </body>
